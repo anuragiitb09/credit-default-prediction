@@ -224,3 +224,7 @@ data/processed/
 # saved models
 models/*.pkl
 models/*.joblib
+
+.DS_Store
+data/.DS_Store
+notebooks/notebooks/
