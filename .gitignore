@@ -216,3 +216,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# data (too large for GitHub, LendingClub CSV is 450MB+)
+data/raw/
+data/processed/
+
+# saved models
+models/*.pkl
+models/*.joblib
