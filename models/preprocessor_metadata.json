@@ -1,0 +1,116 @@
+{
+  "feature_names_in": {
+    "NUM_LOG": [
+      "annual_inc"
+    ],
+    "NUM_PLAIN": [
+      "loan_amnt",
+      "int_rate",
+      "dti",
+      "fico_range_low",
+      "revol_util",
+      "open_acc",
+      "credit_age_months"
+    ],
+    "ORD_GRADE": [
+      "grade"
+    ],
+    "ORD_SUBGRADE": [
+      "sub_grade"
+    ],
+    "TARGET_ENC": [
+      "addr_state"
+    ],
+    "OHE_COLS": [
+      "home_ownership",
+      "purpose"
+    ],
+    "EMP_COL": [
+      "emp_length"
+    ]
+  },
+  "feature_names_out": [
+    "log_features__annual_inc",
+    "num_features__loan_amnt",
+    "num_features__int_rate",
+    "num_features__dti",
+    "num_features__fico_range_low",
+    "num_features__revol_util",
+    "num_features__open_acc",
+    "num_features__credit_age_months",
+    "grade__grade",
+    "subgrade__sub_grade",
+    "state_target__addr_state",
+    "ohe_features__home_ownership_MORTGAGE",
+    "ohe_features__home_ownership_NONE",
+    "ohe_features__home_ownership_OTHER",
+    "ohe_features__home_ownership_OWN",
+    "ohe_features__home_ownership_RENT",
+    "ohe_features__purpose_credit_card",
+    "ohe_features__purpose_debt_consolidation",
+    "ohe_features__purpose_educational",
+    "ohe_features__purpose_home_improvement",
+    "ohe_features__purpose_house",
+    "ohe_features__purpose_major_purchase",
+    "ohe_features__purpose_medical",
+    "ohe_features__purpose_moving",
+    "ohe_features__purpose_other",
+    "ohe_features__purpose_renewable_energy",
+    "ohe_features__purpose_small_business",
+    "ohe_features__purpose_vacation",
+    "ohe_features__purpose_wedding",
+    "emp_length__emp_length"
+  ],
+  "n_features_out": 30,
+  "reference_date": "2018-12-31",
+  "grade_order": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G"
+  ],
+  "subgrade_order": [
+    "A1",
+    "A2",
+    "A3",
+    "A4",
+    "A5",
+    "B1",
+    "B2",
+    "B3",
+    "B4",
+    "B5",
+    "C1",
+    "C2",
+    "C3",
+    "C4",
+    "C5",
+    "D1",
+    "D2",
+    "D3",
+    "D4",
+    "D5",
+    "E1",
+    "E2",
+    "E3",
+    "E4",
+    "E5",
+    "F1",
+    "F2",
+    "F3",
+    "F4",
+    "F5",
+    "G1",
+    "G2",
+    "G3",
+    "G4",
+    "G5"
+  ],
+  "train_default_rate": 0.184252231413757,
+  "train_size": 826606,
+  "val_size": 293105,
+  "test_size": 225639
+}
