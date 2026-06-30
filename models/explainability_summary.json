@@ -1,0 +1,105 @@
+{
+  "shap_sample_size": 5000,
+  "base_value": 0.005314062349498272,
+  "top_10_features": [
+    {
+      "feature": "subsub_grade",
+      "mean_shap": 0.28664353489875793
+    },
+    {
+      "feature": "grade",
+      "mean_shap": 0.1741897612810135
+    },
+    {
+      "feature": "loan_amnt",
+      "mean_shap": 0.16911573708057404
+    },
+    {
+      "feature": "annual_inc",
+      "mean_shap": 0.1151047945022583
+    },
+    {
+      "feature": "int_rate",
+      "mean_shap": 0.10868728905916214
+    },
+    {
+      "feature": "dti",
+      "mean_shap": 0.10590323805809021
+    },
+    {
+      "feature": "fico_range_low",
+      "mean_shap": 0.10422464460134506
+    },
+    {
+      "feature": "addr_state",
+      "mean_shap": 0.08858712762594223
+    },
+    {
+      "feature": "open_acc",
+      "mean_shap": 0.06388293951749802
+    },
+    {
+      "feature": "ownership: MORTGAGE",
+      "mean_shap": 0.05591396987438202
+    }
+  ],
+  "lime_concordance_avg": 0.13333333333333333,
+  "lime_concordance_pass": false,
+  "individual_cases": {
+    "Approved \u2014 low risk": {
+      "sample_idx": 3628,
+      "pred_prob": 0.031378600746393204,
+      "actual": 0,
+      "decision": "APPROVED",
+      "shap_top3": [
+        "subsub_grade",
+        "int_rate",
+        "fico_range_low"
+      ]
+    },
+    "Approved \u2014 moderate risk": {
+      "sample_idx": 2427,
+      "pred_prob": 0.23424454033374786,
+      "actual": 0,
+      "decision": "APPROVED",
+      "shap_top3": [
+        "subsub_grade",
+        "grade",
+        "int_rate"
+      ]
+    },
+    "Rejected \u2014 high risk": {
+      "sample_idx": 324,
+      "pred_prob": 0.9182150363922119,
+      "actual": 1,
+      "decision": "REJECTED",
+      "shap_top3": [
+        "subsub_grade",
+        "grade",
+        "int_rate"
+      ]
+    },
+    "Rejected \u2014 moderate risk": {
+      "sample_idx": 2643,
+      "pred_prob": 0.6201658248901367,
+      "actual": 1,
+      "decision": "REJECTED",
+      "shap_top3": [
+        "subsub_grade",
+        "loan_amnt",
+        "dti"
+      ]
+    },
+    "Borderline": {
+      "sample_idx": 2409,
+      "pred_prob": 0.47368955612182617,
+      "actual": 0,
+      "decision": "APPROVED",
+      "shap_top3": [
+        "annual_inc",
+        "loan_amnt",
+        "addr_state"
+      ]
+    }
+  }
+}
