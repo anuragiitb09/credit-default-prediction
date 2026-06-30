@@ -6,10 +6,7 @@ import shap
 
 from utils import build_raw_input_df, score_applicant, get_shap_explanation, clean_feature_name
 
-
-GRADE_TO_SUBGRADES = {
-    g: [f"{g}{i}" for i in range(1, 6)] for g in ['A','B','C','D','E','F','G']
-}
+ALL_SUBGRADES = [f"{g}{i}" for g in ['A','B','C','D','E','F','G'] for i in range(1,6)]
 
 
 def render(model, preprocessor, explainer, meta, threshold):
@@ -24,7 +21,7 @@ def render(model, preprocessor, explainer, meta, threshold):
             loan_amnt = st.number_input("Loan amount ($)", min_value=500, max_value=40000, value=15000, step=500)
             int_rate  = st.number_input("Interest rate (%)", min_value=5.0, max_value=31.0, value=13.5, step=0.1)
             grade     = st.selectbox("Grade", options=['A','B','C','D','E','F','G'], index=2)
-            sub_grade = st.selectbox("Sub-grade", options=GRADE_TO_SUBGRADES[grade], index=2)
+            sub_grade = st.selectbox("Sub-grade", options=ALL_SUBGRADES, index=10)
             purpose   = st.selectbox("Loan purpose", options=[
                 'debt_consolidation', 'credit_card', 'home_improvement',
                 'major_purchase', 'small_business', 'car', 'medical',
@@ -33,13 +30,13 @@ def render(model, preprocessor, explainer, meta, threshold):
 
         with col2:
             st.subheader("Borrower profile")
-            annual_inc      = st.number_input("Annual income ($)", min_value=0, max_value=2_000_000, value=65000, step=1000)
-            emp_length      = st.selectbox("Employment length", options=[
+            annual_inc     = st.number_input("Annual income ($)", min_value=0, max_value=2_000_000, value=65000, step=1000)
+            emp_length     = st.selectbox("Employment length", options=[
                 '< 1 year', '1 year', '2 years', '3 years', '4 years',
                 '5 years', '6 years', '7 years', '8 years', '9 years', '10+ years'
             ], index=10)
-            home_ownership  = st.selectbox("Home ownership", options=['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
-            addr_state      = st.selectbox("State", options=[
+            home_ownership = st.selectbox("Home ownership", options=['RENT', 'MORTGAGE', 'OWN', 'OTHER'])
+            addr_state     = st.selectbox("State", options=[
                 'CA','TX','NY','FL','IL','PA','OH','GA','NC','MI','NJ','VA','WA',
                 'AZ','MA','TN','IN','MO','MD','WI','CO','MN','SC','AL','LA','KY',
                 'OR','OK','CT','UT','IA','NV','AR','MS','KS','NM','NE','WV','ID',
@@ -48,10 +45,10 @@ def render(model, preprocessor, explainer, meta, threshold):
 
         with col3:
             st.subheader("Credit profile")
-            dti             = st.number_input("Debt-to-income ratio (%)", min_value=0.0, max_value=60.0, value=18.0, step=0.5)
-            fico_range_low  = st.number_input("FICO score", min_value=300, max_value=850, value=695, step=5)
-            revol_util      = st.number_input("Revolving utilization (%)", min_value=0.0, max_value=150.0, value=45.0, step=1.0)
-            open_acc        = st.number_input("Open credit accounts", min_value=0, max_value=60, value=8, step=1)
+            dti              = st.number_input("Debt-to-income ratio (%)", min_value=0.0, max_value=60.0, value=18.0, step=0.5)
+            fico_range_low   = st.number_input("FICO score", min_value=300, max_value=850, value=695, step=5)
+            revol_util       = st.number_input("Revolving utilization (%)", min_value=0.0, max_value=150.0, value=45.0, step=1.0)
+            open_acc         = st.number_input("Open credit accounts", min_value=0, max_value=60, value=8, step=1)
             earliest_cr_line = st.date_input(
                 "Earliest credit line opened",
                 value=datetime.date(2010, 6, 1),
