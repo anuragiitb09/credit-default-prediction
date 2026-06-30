@@ -223,6 +223,8 @@ data/processed/
 
 # saved models
 models/*.pkl
+!models/xgboost_best.pkl
+!models/preprocessor.pkl
 models/*.joblib
 
 .DS_Store
