@@ -1,0 +1,89 @@
+{
+  "protected_attribute": "addr_state mapped to US Census region",
+  "regions": [
+    "Northeast",
+    "Midwest",
+    "South",
+    "West"
+  ],
+  "unconstrained": {
+    "demographic_parity_diff": 0.013724752959836842,
+    "demographic_parity_ratio": 0.7485098537521236,
+    "equalized_odds_diff": 0.02266637567828178,
+    "equalized_odds_ratio": 0.7517460365106531,
+    "predictive_parity_diff": 0.024122562931691904,
+    "accuracy": 0.7850548885609314,
+    "auc_roc": 0.7077560621249455,
+    "eeoc_4_5ths_rule_pass": false
+  },
+  "constrained_eps_0.02": {
+    "demographic_parity_diff": 0.03143453049836842,
+    "accuracy": 0.6433152070342449,
+    "accuracy_cost_vs_unconstrained": 0.14173968152668648
+  },
+  "tradeoff_sweep": [
+    {
+      "eps": NaN,
+      "label": "Unconstrained",
+      "accuracy": 0.7850548885609314,
+      "dp_diff": 0.013724752959836842,
+      "auc": 0.7077560621249455
+    },
+    {
+      "eps": 0.2,
+      "label": "eps=0.2",
+      "accuracy": 0.6431822512952104,
+      "dp_diff": 0.032921722258810515,
+      "auc": NaN
+    },
+    {
+      "eps": 0.15,
+      "label": "eps=0.15",
+      "accuracy": 0.6437539609730587,
+      "dp_diff": 0.032629364041892206,
+      "auc": NaN
+    },
+    {
+      "eps": 0.1,
+      "label": "eps=0.1",
+      "accuracy": 0.6431733875792749,
+      "dp_diff": 0.028827794222473113,
+      "auc": NaN
+    },
+    {
+      "eps": 0.05,
+      "label": "eps=0.05",
+      "accuracy": 0.6433152070342449,
+      "dp_diff": 0.032574576766083996,
+      "auc": NaN
+    },
+    {
+      "eps": 0.02,
+      "label": "eps=0.02",
+      "accuracy": 0.6432132743009852,
+      "dp_diff": 0.030790171341301076,
+      "auc": NaN
+    },
+    {
+      "eps": 0.01,
+      "label": "eps=0.01",
+      "accuracy": 0.6431157734256933,
+      "dp_diff": 0.0321450764549821,
+      "auc": NaN
+    }
+  ],
+  "selection_rate_by_region": {
+    "unconstrained": {
+      "Northeast": 0.05415962355521038,
+      "Midwest": 0.050805229496827885,
+      "South": 0.054573720539767424,
+      "West": 0.04084896757993058
+    },
+    "constrained": {
+      "Northeast": 0.4397642651560144,
+      "Midwest": 0.4214676495517941,
+      "South": 0.43522169019339596,
+      "West": 0.408329734657646
+    }
+  }
+}
