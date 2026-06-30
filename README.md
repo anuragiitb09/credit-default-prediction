@@ -7,10 +7,10 @@ fairness auditing (Fairlearn), and a live lender dashboard.
 ## Target metrics
 | Metric | Target | Achieved |
 |---|---|---|
-| AUC-ROC | ≥ 0.80 | TBD |
-| PR-AUC | ≥ 0.65 | TBD |
-| KS Statistic | ≥ 40 | TBD |
-| Gini Coefficient | ≥ 0.60 | TBD |
+| AUC-ROC | ≥ 0.80 | **0.708** |
+| PR-AUC | ≥ 0.65 | **0.376** |
+| KS Statistic | ≥ 40 | **30.5** |
+| Gini Coefficient | ≥ 0.60 | **0.415** |
 
 ## Live demo
 [Streamlit app — deploying Week 4]
