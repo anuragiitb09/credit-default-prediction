@@ -151,3 +151,8 @@ webencodings==0.5.1
 websocket-client==1.9.0
 websockets==16.0
 xgboost==3.2.0
+category_encoders==2.9.0
+lime==0.2.0.1
+shap==0.49.1
+streamlit==1.58.0
+streamlit-shap==1.0.2
