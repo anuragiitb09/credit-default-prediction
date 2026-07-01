@@ -25,29 +25,6 @@ class CalibratedXGB:
         return (self.predict_proba(X)[:, 1] >= 0.5).astype(int)
 
 
-class EmpLengthEncoder(BaseEstimator, TransformerMixin):
-    def fit(self, X, y=None):
-        return self
-
-    def transform(self, X, y=None):
-        def parse(val):
-            if pd.isnull(val):
-                return -1
-            val = str(val).strip().lower()
-            if '10+' in val:
-                return 10
-            if '< 1' in val:
-                return 0
-            digits = ''.join(filter(str.isdigit, val.split('year')[0]))
-            return int(digits) if digits else -1
-
-        col = X.iloc[:, 0] if hasattr(X, 'iloc') else pd.Series(X.flatten())
-        return col.map(parse).values.reshape(-1, 1)
-
-    def get_feature_names_out(self, input_features=None):
-        return np.array(['emp_length'])
-
-
 # ── App config ───────────────────────────────────────────────────────
 
 st.set_page_config(
