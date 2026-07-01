@@ -1,2 +1,7 @@
 {
+  "python.defaultInterpreterPath": "${env:HOME}/miniconda3/envs/credit-default/bin/python",
+  "editor.formatOnSave": true,
+  "editor.rulers": [88],
+  "jupyter.notebookFileRoot": "${workspaceFolder}",
+  "files.autoSave": "onFocusChange"
 }
