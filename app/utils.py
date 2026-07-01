@@ -6,6 +6,7 @@ import pandas as pd
 import shap
 import xgboost as xgb
 from pathlib import Path
+from sklearn.base import BaseEstimator, TransformerMixin
 
 APP_DIR      = Path(__file__).resolve().parent
 PROJECT_ROOT = APP_DIR.parent
@@ -13,6 +14,30 @@ MODELS_DIR   = PROJECT_ROOT / 'models'
 
 REFERENCE_DATE = pd.Timestamp('2018-12-31')
 LGD = 0.45
+
+
+def _parse_emp_length(val):
+    if pd.isnull(val):
+        return -1
+    val = str(val).strip().lower()
+    if '10+' in val:
+        return 10
+    if '< 1' in val:
+        return 0
+    digits = ''.join(filter(str.isdigit, val.split('year')[0]))
+    return int(digits) if digits else -1
+
+
+class EmpLengthEncoder(BaseEstimator, TransformerMixin):
+    def fit(self, X, y=None):
+        return self
+
+    def transform(self, X, y=None):
+        col = X.iloc[:, 0] if hasattr(X, 'iloc') else pd.Series(X.flatten())
+        return col.map(_parse_emp_length).values.reshape(-1, 1)
+
+    def get_feature_names_out(self, input_features=None):
+        return np.array(['emp_length'])
 
 
 class CalibratedXGB:
@@ -33,6 +58,10 @@ def load_artifacts():
     # Load XGBoost in native JSON format (Python version independent)
     base_xgb = xgb.XGBClassifier()
     base_xgb.load_model(str(MODELS_DIR / 'xgboost_model.json'))
+    # load_model() restores the Booster but not sklearn-wrapper attributes normally
+    # set by fit() -- predict_proba() needs this to know it's binary classification.
+    # (classes_ is a read-only property derived from n_classes_, not separately settable.)
+    base_xgb.n_classes_ = 2
 
     # Load Platt scaler
     with open(MODELS_DIR / 'platt_scaler.pkl', 'rb') as f:
