@@ -1,8 +1,10 @@
 import cloudpickle
 import json
+import pickle
 import numpy as np
 import pandas as pd
 import shap
+import xgboost as xgb
 from pathlib import Path
 
 APP_DIR      = Path(__file__).resolve().parent
@@ -13,10 +15,33 @@ REFERENCE_DATE = pd.Timestamp('2018-12-31')
 LGD = 0.45
 
 
-def load_artifacts():
-    with open(MODELS_DIR / 'xgboost_best.pkl', 'rb') as f:
-        model = cloudpickle.load(f)
+class CalibratedXGB:
+    def __init__(self, base_model, scaler):
+        self.base_model = base_model
+        self.scaler = scaler
+        self.estimator = base_model
 
+    def predict_proba(self, X):
+        raw_probs = self.base_model.predict_proba(X)[:, 1].reshape(-1, 1)
+        return self.scaler.predict_proba(raw_probs)
+
+    def predict(self, X):
+        return (self.predict_proba(X)[:, 1] >= 0.5).astype(int)
+
+
+def load_artifacts():
+    # Load XGBoost in native JSON format (Python version independent)
+    base_xgb = xgb.XGBClassifier()
+    base_xgb.load_model(str(MODELS_DIR / 'xgboost_model.json'))
+
+    # Load Platt scaler
+    with open(MODELS_DIR / 'platt_scaler.pkl', 'rb') as f:
+        platt_scaler = pickle.load(f)
+
+    # Recreate calibrated wrapper
+    model = CalibratedXGB(base_xgb, platt_scaler)
+
+    # Load preprocessor with cloudpickle
     with open(MODELS_DIR / 'preprocessor.pkl', 'rb') as f:
         preprocessor = cloudpickle.load(f)
 
@@ -26,7 +51,6 @@ def load_artifacts():
     with open(MODELS_DIR / 'explainability_summary.json') as f:
         explain_meta = json.load(f)
 
-    base_xgb = model.estimator
     explainer = shap.TreeExplainer(base_xgb, feature_perturbation='tree_path_dependent')
 
     return model, base_xgb, preprocessor, meta, explain_meta, explainer
