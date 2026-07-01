@@ -12,4 +12,4 @@ plotly==5.22.0
 joblib==1.4.2
 cloudpickle==3.0.0
 fairlearn==0.10.0
-category_encoders==2.6.3
+category_encoders==2.6.3# Streamlit Cloud deployment
