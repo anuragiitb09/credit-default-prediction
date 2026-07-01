@@ -229,4 +229,5 @@ models/*.joblib
 
 .DS_Store
 data/.DS_Store
-notebooks/notebooks/
+notebooks/notebooks/.vscode/settings.json
+reports/shap_values_sample.parquet
